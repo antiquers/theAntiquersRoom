@@ -35,7 +35,6 @@
 
                     var requestdata = $(this).serialize();
 
-
                     console.log(requestdata);
 
                     if( isAjaxing ){
@@ -46,7 +45,7 @@
                     $.ajax({
                         async: true,
                         type : 'POST',
-                        url : "/users/resetPwd?" + requestdata,
+                        url : "/users/resetPwdPost?" + requestdata,
                         dataType : "json",
                         contentType: "application/json; charset=UTF-8",
                         success : function (result) {
@@ -58,85 +57,53 @@
                                 $('#inputuserId').val(null);
                                 $('#inputNickname').val(null);
 
-
                             }else {
                                 console.log('nope');
                                 $('#mymsg').text('nope');
                                 $('#inputuserId').val(null);
                                 $('#inputNickname').val(null);
-
-
                             }
 
                             setTimeout(function (){ isAjaxing = false}, 1000);
-
-
                         },
                         error : function (error) {
-
                             console.log("error", error);
-
                             setTimeout(function (){ isAjaxing = false}, 1000);
-
                         },
                         complete : function () {
-
                             console.log("ajax completed")
-
-
                         }
-
-
                     });
-
-
-
-
                 });
-
             });
-
-            }
-        )
+        });
     </script>
 
     <style>
 
         .mybtn{
-
             background-color: brown;
             border-color: aliceblue;
-
-
         }
 
         .mybtn:hover {
-
             background-color: grey;
             border-color: grey;
-
         }
 
         .mybtn:active{
-
             background-color: brown;
             border-color: aliceblue;
         }
 
         .mybtn:focus{
-
             background-color: brown;
             border-color: aliceblue;
-
         }
-
-
-
     </style>
 </head>
 <body>
     <h3>resetPwd</h3>
-
 
     <button type="button" class="btn btn-secondary mybtn" data-toggle="modal" data-target="#exampleModalCenter" style="" >
         비밀번호찾기
@@ -157,14 +124,12 @@
                         <input id="inputNickname" name="nickName" placeholder="type your nickname">
                         <button type="submit" id="resetPasswordFormSubmit" class="btn btn-secondary mybtn">click this</button>
                     </form>
-
                 </div>
                 <div class="modal-footer">
                     <p id="mymsg"></p>
 
                     <button type="button" class="btn btn-secondary mybtn" data-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
     </div>

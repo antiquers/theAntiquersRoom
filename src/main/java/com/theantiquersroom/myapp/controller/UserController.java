@@ -33,25 +33,14 @@ public class UserController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
-    @GetMapping("/register")
-    public void register() {	//회원가입 화면 요청
-        log.debug("register() invoked.");
 
-    } //register
-
-    @PostMapping("/register")
+    @PostMapping("/registerPost")
     @ResponseStatus(HttpStatus.CREATED)
     public String register(UserDTO user) { //회원가입 서비스 수행, 저장
         log.debug("register({}) invoked.", user);
 
         this.service.registerUser(user);
         return "/main";
-    } //register
-
-    @GetMapping("/kakaoLogin")
-    public void kakaoLogin() {	//카카오 로그인 화면 요청
-        log.debug("kakaoLogin() invoked.");
-
     } //register
 
     @PostMapping("/kakaoLogin")
@@ -84,13 +73,7 @@ public class UserController {
 
     } //checkPhone
 
-    @GetMapping("/login")
-    public void login() {	// 로그인 페이지로 이동
-        log.debug("login() invoked.");
-
-    } //login
-
-    @PostMapping("/login")
+    @PostMapping("/loginPost")
     public String login(
     		@RequestParam("userId") String userId, 
     		@RequestParam("password") String password, HttpServletRequest request) {	// 로그인 실행
@@ -107,7 +90,6 @@ public class UserController {
         return "/main";
     } //login
 
-
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
@@ -117,29 +99,14 @@ public class UserController {
         return "/main";
     } //logout
 
-
-    @GetMapping("/findId")
-    public void findId() {		// 아이디 찾기 페이지로 이동
-        log.debug("findId() invoked.");
-
-    } //findId
-
-    @PostMapping("/findId")
+    @PostMapping("/findIdPost")
     public String findId(String nickName, String phone) {	// 아이디 찾기 실행
         log.debug("findId({}, {}) invoked.", nickName, phone);
 
         return "/user/login";	// 아이디 확인 후, 로그인 페이지로 이동
     } //findId
 
-
-
-    @GetMapping("/resetPwd")
-    public void resetPwd() {	// 비밀번호 재설정 페이지로 이동
-        log.debug("resetPwd() invoked.");
-
-    } //resetPwd
-
-    @PostMapping("/resetPwd")
+    @PostMapping("/resetPwdPost")
     public @ResponseBody Map<Object, Object> resetPwd(@RequestParam("userId") String userId, @RequestParam("nickName") String nickName) throws Exception {	// 비밀번호 재설정 실행
 
         System.out.println("hihi");
@@ -154,18 +121,10 @@ public class UserController {
 
 //        model.addAttribute("checkemailsent",b);
 
-
         return map;
     } //resetPwd
 
-
-    @GetMapping("/modify")
-    public void modify() {	// 회원정보 수정페이지로 이동
-        log.debug("USER_modify() invoked.");
-
-    } //modify
-
-    @PostMapping("/modify")
+    @PostMapping("/modifyPost")
     public String modify(UserDTO userDto) {	// 회원정보 수정 실행
         log.debug("USER_modify({}) invoked.", userDto);
 
