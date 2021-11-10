@@ -16,7 +16,7 @@ import com.theantiquersroom.myapp.domain.UserVO;
 public interface UserService {
 
     // 회원가입
-    public abstract boolean registerUsers(UserVO user);
+    public abstract boolean registerUser(UserDTO user);
 
     // 아이디 중복 검사
     public abstract boolean checkId(String userId);
@@ -53,6 +53,17 @@ public interface UserService {
     
     // 나의 입찰리스트 조회
     public abstract List<ProductVO> getBidList(Criteria cri);
+    
+    // =================================================== //
+
+	// 전체 회원 목록조회
+	public abstract List<UserVO> getUserList();
+	
+	// 상세 회원 목록 조회
+	public abstract UserVO get(String userId);
+	
+    // 회원정보 수정
+    public abstract boolean modify(UserVO user);
     
 } // end interface
 

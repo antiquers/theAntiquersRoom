@@ -15,10 +15,10 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
 
     //전체 회원 목록 조회
-    public abstract List<UserVO> getUserList(Criteria cri);
+//    public abstract List<UserVO> getUserList(Criteria cri);
 
     //회원가입
-    public abstract Integer insertUser(UserVO user);
+    public abstract Integer insertUser(UserDTO user);
 
     //특정 아이디의 닉네임 조회
     public abstract String selectUserNickname(@Param("userId") String userId);
@@ -50,4 +50,17 @@ public interface UserMapper {
     //emailchecktemp table의 updatedate 조회
     public abstract String selectUpdatedate(@Param("userId") String userId);
 
+    
+	// =========================== //
+
+    //전체 회원 목록 조회
+  public abstract List<UserVO> getUserList();
+  
+  // 회원 정보 수정
+	public abstract Integer update(UserVO user);
+
+	// 특정 게시물 상세조회 - XML Mapper 방식으로 처리
+	public abstract UserVO read(String userId);
+	
+    
 } // end interface
