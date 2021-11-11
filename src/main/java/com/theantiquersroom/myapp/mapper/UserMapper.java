@@ -3,18 +3,18 @@ package com.theantiquersroom.myapp.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
-import org.apache.ibatis.annotations.Param;
 
 
 @Mapper
 public interface UserMapper {
 
     //전체 회원 목록 조회
-//    public abstract List<UserVO> getUserList(Criteria cri);
+//	public abstract List<UserVO> getUserList(Criteria cri);
 
     //회원가입
     public abstract Integer insertUser(UserDTO user);
@@ -35,14 +35,15 @@ public interface UserMapper {
     public abstract Integer getPhone(String phone);
 
     //로그인
-    public abstract UserVO login(String userId);
+    public abstract UserVO login(LoginDTO dto);
     
-	// =========================== //
+    
+	// ================================================= //
 
     // 전체 회원 목록 조회
-  public abstract List<UserVO> getUserList();
+    public abstract List<UserVO> getUserList();
   
-  // 회원 정보 수정
+  	// 회원 정보 수정
 	public abstract Integer update(UserVO user);
 
 	// 회원정보 상세조회 - XML Mapper 방식으로 처리
@@ -51,8 +52,8 @@ public interface UserMapper {
 	//  특정 회원 삭제
 	public abstract Integer delete(String userId);
 	
-  // 아이디 찾기
-  public abstract UserVO findId(UserVO vo);
+	// 아이디 찾기
+	public abstract UserVO findId(UserVO vo);
 	
     
 	

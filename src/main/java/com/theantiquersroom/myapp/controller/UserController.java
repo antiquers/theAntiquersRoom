@@ -1,5 +1,9 @@
 package com.theantiquersroom.myapp.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,9 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
@@ -20,10 +27,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Log4j2
 @NoArgsConstructor
 
@@ -31,6 +34,7 @@ import java.util.Map;
 @Controller
 public class UserController {
 
+	
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
@@ -73,30 +77,7 @@ public class UserController {
 
     } //checkPhone
 
-    @GetMapping("/login")
-    public void login() {	// 로그인 페이지로 이동
-        log.debug("login() invoked.");
-
-    } //login
-
-    @PostMapping("/login")
-    public String login(
-    		@RequestParam("userId") String userId, 
-    		@RequestParam("password") String password, HttpServletRequest request) {	// 로그인 실행
-        log.debug("login({}, {}) invoked.", userId, password);
-        HttpSession session = request.getSession();
-        
-        boolean isUser=this.service.login(userId, password);
-        log.info("\t+ isUser: {}", isUser);
-        
-        if(isUser) {
-        	session.setAttribute("userId", userId);
-        } //if
-        
-        return "/main";
-    } //login
-
-
+    
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
@@ -106,11 +87,7 @@ public class UserController {
         return "/main";
     } //logout
 
-
-
-
-
-
+    
     @GetMapping("/resetPwd")
     public void resetPwd() {	// 비밀번호 재설정 페이지로 이동
         log.debug("resetPwd() invoked.");
@@ -132,16 +109,10 @@ public class UserController {
 
 //        model.addAttribute("checkemailsent",b);
 
-
         return map;
     } //resetPwd
 
-
-
-
-
-
-
+    
     @GetMapping("/getMyAuctionList")
     public String getMyAuctionList(Model model) {	// 나의 경매리스트 페이지로 이동
         log.debug("getMyAuctionList({}) invoked.", model);
@@ -187,12 +158,12 @@ public class UserController {
  		
  		UserVO vo=
  				new UserVO(
- 						user.getKakaoUniqueId(),
  						user.getUserId(),
  						user.getPassword(),
  						user.getNickName(),
  						user.getPhone(),
- 						user.getUserType()
+ 						user.getUserType(),
+ 						user.getKakaoUniqueId()
  						
  				);
  		

@@ -2,10 +2,10 @@ package com.theantiquersroom.myapp.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
@@ -31,7 +31,7 @@ public interface UserService {
 
     
     // 로그인 실행
-    public abstract boolean login(String userId, String password);
+    public abstract UserVO login(LoginDTO dto) throws Exception;
     
     // 아이디 찾기 실행
     public abstract UserVO findId(String nickName, String phone);
